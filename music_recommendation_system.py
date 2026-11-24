@@ -27,14 +27,13 @@ data = data.drop_duplicates()
 data['ts'] = pd.to_datetime(data['ts']) 
 data = data.sort_values(['user_id', 'track_name', 'ts']).reset_index(drop=True)
 
-# extract useful features from the timestamp
+# extract useful features 
 data['hour'] = data['ts'].dt.hour
 data['day_of_week'] = data['ts'].dt.dayofweek
 
-# how many times this user has played this track before (so far)
+# how many times this user has played this track before 
 data['play_count_so_far'] = data.groupby(['user_id', 'track_name']).cumcount()
 
-# convert into 0-1
 data['shuffle'] = data['shuffle'].astype(int)
 data['skipped'] = data['skipped'].astype(int)
 
